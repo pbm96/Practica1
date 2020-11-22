@@ -7,12 +7,8 @@ using namespace std;
 
 int main() {
 
-
-    coche nuevo;
-    Cola cola;
-
     // Prueba para generar un bastidor para un coche
-
+    generarCabezera();
 
 
     return 0;

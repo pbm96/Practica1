@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <ctime>
+#include <iomanip>
 #include "../Headers/coches.h"
 
 
@@ -35,7 +36,22 @@ string generarBastidor() {
 }
 
 void generarCabezera(){
-    cout<<"Cabezera";
+    cout<<setw(30)<<"Linea de produccion 1|"<<setw(30)<<"Linea de produccion 2|"<<setw(30)<<"Linea de produccion 3|"<<setw(30)<<"Linea de produccion 4|"<<endl;
+    for(int i = 0; i<120;i++){
+        cout<<"-";
+    }
+    cout<<endl;
+    for(int i = 0; i<4;i++){
+        cout<<setw(9)<<"Bastidor|"<<setw(9)<<"Color|"<<setw(9)<<"Modelo|"<<setw(9)<<"Estado|";
+
+    }
+    cout<<endl;
+
+    for(int i = 0; i<120;i++){
+        cout<<"-";
+    }
+    cout<<endl;
+
 }
 
 //Destructor

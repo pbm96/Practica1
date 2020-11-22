@@ -7,7 +7,7 @@
 using namespace std;
 
 
-void generarCabecera();
+void generarCabezera();
 string generarBastidor();
 struct coche {
     string bastidor;

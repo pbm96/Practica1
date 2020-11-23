@@ -1,20 +1,26 @@
 //
 // Created by pablo on 20/11/20.
 //
-#include <iostream>
+
+#define N1 100
 #ifndef PRACTICA1_COCHES_H
 #define PRACTICA1_COCHES_H
+
 using namespace std;
 
-
-void generarCabezera();
-string generarBastidor();
 struct coche {
     string bastidor;
     string color;
     string estado;
     string modelo;
 };
+
+
+void generarCabezera();
+string generarBastidor();
+string generarModelo();
+coche generarCoches();
+string generarColor();
 
 
 class Nodo {

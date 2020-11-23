@@ -2,9 +2,7 @@
 // Created by pablo on 20/11/20.
 //
 
-#include <stdio.h>
 #include <iostream>
-#include <ctime>
 #include <iomanip>
 #include "../Headers/coches.h"
 
@@ -21,7 +19,7 @@ string generarBastidor() {
      char numeros[] ="0123456789";
      char letras[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    srand((unsigned)time(0));
+
 
     for (int i = 0; i < 2; ++i)
         bastidor += numeros[rand() % (sizeof(numeros) - 1)];
@@ -30,13 +28,34 @@ string generarBastidor() {
     for (int i = 0; i < 4; ++i)
         bastidor += numeros[rand() % (sizeof(numeros) - 1)];
 
-
     return bastidor;
 
 }
+string generarColor() {
 
+    string color;
+    int posicion;
+    string colores[6] ={"Blanco","Rojo","Negro","Azul","Naranja","Gris"};
+    posicion =  rand()%6;
+        color = colores[posicion];
+
+    return color;
+
+}
+string generarModelo() {
+
+    string modelo;
+    int posicion;
+    string modelos[4] ={"Ibiza","Arona","Ateca","Toledo"};
+    posicion =  rand()%4;
+    modelo = modelos[posicion];
+
+    return modelo;
+
+}
+// Metodo que se encarga de pintar la cabezera de la consola
 void generarCabezera(){
-    cout<<setw(30)<<"Linea de produccion 1|"<<setw(30)<<"Linea de produccion 2|"<<setw(30)<<"Linea de produccion 3|"<<setw(30)<<"Linea de produccion 4|"<<endl;
+    cout<<setw(36)<<"Linea de produccion 1|"<<setw(36)<<"Linea de produccion 2|"<<setw(36)<<"Linea de produccion 3|"<<setw(36)<<"Linea de produccion 4|"<<endl;
     for(int i = 0; i<120;i++){
         cout<<"-";
     }
@@ -52,6 +71,16 @@ void generarCabezera(){
     }
     cout<<endl;
 
+}
+
+coche generarCoches(){
+    struct coche c;
+        c.bastidor = generarBastidor();
+        c.color = generarColor();
+        c.estado = "ff";
+        c.modelo = generarModelo();
+
+    return c;
 }
 
 //Destructor

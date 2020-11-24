@@ -146,6 +146,8 @@ bool Cola::vacia(){
         return true;
     return false;
 }
+int menu() {
+}
 
 void Pila::apilar(int v) {
     pnodo nuevo;

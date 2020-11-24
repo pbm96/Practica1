@@ -74,7 +74,6 @@ string generarColor();
 coche generarCoches();
 
 
-int menu();
 
 
 #endif //PRACTICA1_COCHES_H

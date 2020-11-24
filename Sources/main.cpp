@@ -15,7 +15,6 @@ int main() {
     Cola ateca, ateca2;
     Cola ibiza, ibiza2;
     Cola toledo, toledo2;
-    int num;
     int contEjecucion = 0;
     int nArray = 8;
     srand(time(0));
@@ -30,6 +29,7 @@ int main() {
         cout << "1- Ejecutar\n";
         cout << "2- Buscar vehiculo\n";
         cout << "3- Salir\n";
+        cout <<longArray<<"/"<<N1<<" Coches creados.   "<<"Paso del programa: "<<contEjecucion<<endl;
         cin >> a;
 
         switch (a) {
@@ -37,30 +37,42 @@ int main() {
                 //generamos la cabecera de la linea de produccion
                 generarCabezera();
 
+                //Si los coches que hemos introducido son menores que n1 seguimos introduciendo coches
+                if(longArray!= N1) {
 
-                i = contEjecucion * nArray;
-                longArray = nArray * (contEjecucion + 1);
-                cout << longArray << endl;
+                    nArray * (contEjecucion + 1) <= N1 ? longArray = nArray * (contEjecucion + 1) : longArray = N1;
 
-                for (i; i < longArray; i++) {
+                    if (longArray == N1) {
+                        cout << "Unicamente se podran introducir: " << nArray * (contEjecucion + 1) - N1 << " coches."<<endl;
+                    }
 
-                    coches[i] = generarCoches();
+                    if(contEjecucion >= 2){
+                        for (i = 0; i < longArray - (N2*2); i++) {
+                            if ( coches[i].estado =="fi") {
+                                coches[i].estado ="ff";
+                            }
+                        }
+                    }
+                    i = contEjecucion * nArray;
+                    for (i; i < longArray; i++) {
 
-                    if (coches[i].modelo == "Arona") {
-                        arona.encolar(i);
+                        coches[i] = generarCoches();
 
-                    } else if (coches[i].modelo == "Ateca") {
-                        ateca.encolar(i);
+                        if (coches[i].modelo == "Arona") {
+                            arona.encolar(i);
 
-                    } else if (coches[i].modelo == "Ibiza") {
-                        ibiza.encolar(i);
+                        } else if (coches[i].modelo == "Ateca") {
+                            ateca.encolar(i);
 
-                    } else if (coches[i].modelo == "Toledo") {
-                        toledo.encolar(i);
+                        } else if (coches[i].modelo == "Ibiza") {
+                            ibiza.encolar(i);
 
+                        } else if (coches[i].modelo == "Toledo") {
+                            toledo.encolar(i);
+
+                        }
                     }
                 }
-                cout << coches[0].bastidor << endl;
 
                 // generamos la linea de producción
                 while (!arona.vacia() || !ateca.vacia() || !ibiza.vacia() || !toledo.vacia()) {
@@ -103,9 +115,9 @@ int main() {
 
                 }
 
+                // incluimos todos los coches creados en la cola
                 for (i = 0; i < longArray; i++) {
 
-                    coches[i] = generarCoches();
 
                     if (coches[i].modelo == "Arona") {
                         arona.encolar(i);
@@ -121,6 +133,8 @@ int main() {
 
                     }
                 }
+
+
 
                 contEjecucion++;
                 break;

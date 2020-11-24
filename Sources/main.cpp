@@ -36,7 +36,53 @@ int main() {
     }
 
     // generamos la linea de producción
-    generarLP(arona, ateca, ibiza, toledo, coches);
+   // generarLP(arona, ateca, ibiza, toledo, coches);
+    int a,b;
+    do{
+
+
+        cout<<"1- Ejecutar\n";
+        cout<<"2- Buscar vehiculo\n";
+        cout<<"3- Salir\n";
+        cin>>a;
+
+        switch(a)
+        {
+            case 1:
+                cout<<"Ejecutamos el programa\n";
+                break;
+            case 2:
+                cout<<"Buscamos un coche por su numero de bastidor\n";
+                break;
+            case 3:
+                cout<<"¿Seguro que quieres salir?... SI o NO\n";
+                cout<<"\n 1-SI";
+                cout<<"\n 2-NO\n\n";
+                cin>>b;
+                if(b==1){
+                    a=3;
+                }
+                else{
+                    a=1;
+                }
+            default:
+                cout<<"Debe de introducir 1,2,3\n";
+
+
+        }
+    }
+
+    while(a!=3);
+
+
+
+
+
+
+
 
     return 0;
-}
+
+
+    }
+

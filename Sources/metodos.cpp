@@ -165,6 +165,8 @@ bool Cola::vacia(){
         return true;
     return false;
 }
+int menu() {
+}
 
 
 

@@ -39,13 +39,21 @@ int main() {
 
                 //Si los coches que hemos introducido son menores que n1 seguimos introduciendo coches
                 if(longArray!= N1) {
-                    i = contEjecucion * nArray;
+
                     nArray * (contEjecucion + 1) <= N1 ? longArray = nArray * (contEjecucion + 1) : longArray = N1;
 
                     if (longArray == N1) {
                         cout << "Unicamente se podran introducir: " << nArray * (contEjecucion + 1) - N1 << " coches."<<endl;
                     }
 
+                    if(contEjecucion >= 2){
+                        for (i = 0; i < longArray - (N2*2); i++) {
+                            if ( coches[i].estado =="fi") {
+                                coches[i].estado ="ff";
+                            }
+                        }
+                    }
+                    i = contEjecucion * nArray;
                     for (i; i < longArray; i++) {
 
                         coches[i] = generarCoches();
@@ -127,9 +135,7 @@ int main() {
                 }
 
 
-                if(contEjecucion > 2){
 
-                }
                 contEjecucion++;
                 break;
             case 2:

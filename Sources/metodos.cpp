@@ -62,7 +62,7 @@ void generarCabezera(){
     }
     cout<<endl;
     for(int i = 0; i<4;i++){
-        cout<<setw(9)<<"Bastidor|"<<setw(7)<<"Color|"<<setw(9)<<"Modelo|"<<setw(6)<<"Estado|";
+        cout<<setw(9)<<"Bastidor|"<<setw(7)<<"Modelo|"<<setw(9)<<"Color|"<<setw(6)<<"Estado|";
 
     }
     cout<<endl;
@@ -74,36 +74,12 @@ void generarCabezera(){
 
 }
 
+//Funcion para generar la linea de produccion
 void generarLP(Cola arona, Cola ateca, Cola ibiza, Cola toledo, coche coches[]){
-    while (!arona.vacia() || !ateca.vacia() || !ibiza.vacia() || !toledo.vacia()){
 
-        if(!arona.vacia()) {
-            int i = arona.desencolar();
-            cout << setw(8)<<coches[i].bastidor << "|" <<  setw(6)<<coches[i].modelo << "|" <<setw(8)<<coches[i].color << "|" <<setw(6)<<coches[i].estado << "|";
-        } else
-            cout << setw(8)<<" "<< "|" << setw(6)<<" "<< "|"<< setw(8)<<" "<< "|"<< setw(6)<<" "<< "|";
-        if(!ateca.vacia()) {
-            int j = ateca.desencolar();
-            cout << setw(8)<<coches[j].bastidor << "|" <<  setw(6)<<coches[j].modelo << "|" <<setw(8)<<coches[j].color << "|" <<setw(6)<<coches[j].estado << "|";
-        } else
-            cout << setw(8)<<" "<< "|" << setw(6)<<" "<< "|"<< setw(8)<<" "<< "|"<< setw(6)<<" "<< "|";
-        if(!ibiza.vacia()) {
-            int k = ibiza.desencolar();
-            cout << setw(8)<<coches[k].bastidor << "|" <<  setw(6)<<coches[k].modelo << "|" <<setw(8)<<coches[k].color << "|" <<setw(6)<<coches[k].estado << "|";
-        } else
-            cout << setw(8)<<" "<< "|" << setw(6)<<" "<< "|"<< setw(8)<<" "<< "|"<< setw(6)<<" "<< "|";
-
-        if(!toledo.vacia()) {
-            int x = toledo.desencolar();
-            cout << setw(8)<<coches[x].bastidor << "|" <<  setw(6)<<coches[x].modelo << "|" <<setw(8)<<coches[x].color << "|" <<setw(6)<<coches[x].estado << "|";
-        } else
-            cout << setw(8)<<" "<< "|" << setw(6)<<" "<< "|"<< setw(8)<<" "<< "|"<< setw(6)<<" "<< "|";
-
-        cout<<endl;
-
-    }
+    ;
 }
-
+// funcion para generar coches para fabricar
 coche generarCoches(){
     struct coche c;
         c.bastidor = generarBastidor();
@@ -118,6 +94,10 @@ coche generarCoches(){
 Cola::~Cola() {
     while (frente) desencolar();
 }
+Pila::~Pila() {
+    while (cima) desapilar();
+}
+
 
 //Añadir elemento en la cola
 void Cola::encolar(int v) {
@@ -158,6 +138,7 @@ int Cola::desencolar() {
     return v;
 }
 
+//funcion para comprobar que la cola esta vacia
 bool Cola::vacia(){
     pnodo nodo;
     nodo = frente;
@@ -168,5 +149,31 @@ bool Cola::vacia(){
 int menu() {
 }
 
+void Pila::apilar(int v) {
+    pnodo nuevo;
+    nuevo = new Nodo(v,cima);
+    cima = nuevo;
+}
+int Pila::desapilar() {
+    pnodo nodo;
+    int v;
+    if(!cima)return 0;
+
+    nodo = cima;
+    cima=nodo->siguiente;
+
+    v = nodo->valor;
+    delete nodo;
+
+    return v;
+
+}
+
+void Pila::mostrarCima() {
+    if(!cima)
+        cout << "Cima: null"<<endl;
+    else
+        cout << "Cima: "<<cima->valor<<endl;
+}
 
 

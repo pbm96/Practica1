@@ -2,7 +2,7 @@
 // Created by pablo on 20/11/20.
 //
 
-#define N1 100
+#define N1 20
 #ifndef PRACTICA1_COCHES_H
 #define PRACTICA1_COCHES_H
 
@@ -16,11 +16,7 @@ struct coche {
 };
 
 
-void generarCabezera();
-string generarBastidor();
-string generarModelo();
-coche generarCoches();
-string generarColor();
+
 
 
 class Nodo {
@@ -50,11 +46,17 @@ public:
     void encolar(int v);
 
     int desencolar();
-
+    bool vacia();
 
 
 
 };
+void generarCabezera();
+void generarLP(Cola arona, Cola ateca, Cola ibiza, Cola toledo, coche coches[]);
+string generarBastidor();
+string generarModelo();
+coche generarCoches();
+string generarColor();
 
 
 #endif //PRACTICA1_COCHES_H

@@ -17,13 +17,15 @@ Pila camion;
 void pintarLP();
 void descargarCamion();
 void cargarCamion(int i, int longArray);
+void buscarCoche(string bastidor, int longArray);
+coche buscarCoche(string bastidor);
 int main() {
 
 
     int contEjecucion = 0;
     int nArray = N2;
     srand(time(0));
-
+    string bastidor;
     int i;
     int longArray;
     int longArrayC;
@@ -76,14 +78,31 @@ int main() {
                         }
                     }
 
+
+                }
                     if (contEjecucion == 3 )
                             cargarCamionB = true;
-                    if (cargarCamionB) {
-                        cout << "Se carga el camión: " << endl;
-                        cargarCamion(i,longArray);
-                    }
-                }
 
+                    if (cargarCamionB) {
+                        int cargaCamion = N3;
+
+                        if(cargaCamion >= N2) {
+                            cout << "Se carga el camion 1 " << endl;
+
+                            cargarCamion(i, longArray);
+                        }
+                        else if(cargaCamion <= N2){
+                            cargaCamion = 0;
+                            int cont = 1;
+                            while (cargaCamion < N2 ){
+                                cout << "Se carga el camion "<<cont << endl;
+                                cargarCamion(i, longArray);
+                                cargaCamion += N3;
+                                cont++;
+
+                            }
+                        }
+                    }
                 // cambiamos de estado a los coches que llevan 2 turnos en lP
                 if(contEjecucion >= 2){
                     longArrayC <=N1+(N2*2)?cambioEstado = longArrayC - (N2*2): cambioEstado = N1;
@@ -125,7 +144,10 @@ int main() {
                 contEjecucion++;
                 break;
             case 2:
-                cout << "Buscamos un coche por su numero de bastidor\n";
+
+                cout << "Introducir bastidor para buscar: ";
+                cin >> bastidor;
+                buscarCoche(bastidor, longArray);
                 break;
             case 3:
                 cout << "¿Seguro que quieres salir?... SI o NO\n";
@@ -206,12 +228,13 @@ void pintarLP(){
 
 // metodo para cargar el camion
 void cargarCamion(int i, int longArray){
+    int c = 0;
     // incluimos los coches con estado ff en turno anterior al camión.
     for (i = 0; i < longArray; i++) {
         if(coches[i].estado=="ff"){
             camion.apilar(i);
             coches[i].estado = "ci";
-            cout <<"Camion cargado con: "<<coches[i].bastidor<<"Estado: "<<coches[i].estado<<endl;
+            cout <<"Camion cargado con: "<<coches[i].bastidor<<" Estado: "<<coches[i].estado<<endl;
 
             if (coches[i].modelo == "Arona") {
                 arona.desencolar();
@@ -226,6 +249,8 @@ void cargarCamion(int i, int longArray){
                 toledo.desencolar();
 
             }
+             c++;
+
         }
         // si los coches no tienen estado fi o ff no se muestran
         else if(coches[i].estado=="ci" || coches[i].estado=="cf"){
@@ -242,7 +267,12 @@ void cargarCamion(int i, int longArray){
                 toledo.desencolar();
 
             }
+
+
         }
+
+        if (c == N3)
+            break;
     }
 }
 // metodo para descargar el camion
@@ -253,4 +283,22 @@ void descargarCamion(){
         coches[i].estado = "cf";
         cout << "Camion descargando... :"<< coches[i].bastidor<<" Estado: "<< coches[i].estado<<endl;
     }
+}
+
+void buscarCoche(string bastidor, int longArray) {
+    bool encontrado = false;
+    coche cocheEncontrado;
+    for (int i = 0; i < longArray; i++) {
+        if (coches[i].bastidor == bastidor) {
+            cocheEncontrado = coches[i];
+            encontrado = true;
+        }
+
+    }
+    if (encontrado)
+        cout << "El estado del coche " << cocheEncontrado.bastidor << " es: " << cocheEncontrado.estado << endl;
+    else
+        cout << "No se ha encontrado el coche"<<endl;
+
+
 }

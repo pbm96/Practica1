@@ -3,7 +3,7 @@
 #include <iomanip>
 
 #include<ctime>
-#include "../Headers/coches.h"
+#include "../Headers//coches.h"
 
 
 using namespace std;
@@ -16,12 +16,13 @@ int main() {
     Cola ibiza, ibiza2;
     Cola toledo, toledo2;
     int contEjecucion = 0;
-    int nArray = 8;
+    int nArray = N2;
     srand(time(0));
 
     int i;
     int longArray;
-
+    int longArrayC;
+    int cambioEstado;
     int a, b;
     do {
 
@@ -38,21 +39,16 @@ int main() {
                 generarCabezera();
 
                 //Si los coches que hemos introducido son menores que n1 seguimos introduciendo coches
-                if(longArray!= N1) {
+                longArrayC = nArray * (contEjecucion + 1);
 
+                if(longArray!= N1) {
                     nArray * (contEjecucion + 1) <= N1 ? longArray = nArray * (contEjecucion + 1) : longArray = N1;
 
                     if (longArray == N1) {
                         cout << "Unicamente se podran introducir: " << nArray * (contEjecucion + 1) - N1 << " coches."<<endl;
                     }
 
-                    if(contEjecucion >= 2){
-                        for (i = 0; i < longArray - (N2*2); i++) {
-                            if ( coches[i].estado =="fi") {
-                                coches[i].estado ="ff";
-                            }
-                        }
-                    }
+
                     i = contEjecucion * nArray;
                     for (i; i < longArray; i++) {
 
@@ -70,6 +66,16 @@ int main() {
                         } else if (coches[i].modelo == "Toledo") {
                             toledo.encolar(i);
 
+                        }
+                    }
+                }
+
+                if(contEjecucion >= 2){
+                    longArrayC <=N1+(N2*2)?cambioEstado = longArrayC - (N2*2): cambioEstado = N1;
+
+                    for (i = 0; i < cambioEstado; i++) {
+                        if ( coches[i].estado =="fi") {
+                            coches[i].estado ="ff";
                         }
                     }
                 }

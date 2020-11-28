@@ -61,7 +61,7 @@ public:
     void apilar(int v);
 
     int desapilar();
-    void mostrarCima();
+    bool pilaVacia();
 
 
 
@@ -74,7 +74,6 @@ string generarColor();
 coche generarCoches();
 
 
-int menu();
 
 
 #endif //PRACTICA1_COCHES_H

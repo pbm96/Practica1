@@ -31,6 +31,8 @@ string generarBastidor() {
     return bastidor;
 
 }
+// Metodo para generar color del coche aleatorio
+
 string generarColor() {
 
     string color;
@@ -42,6 +44,7 @@ string generarColor() {
     return color;
 
 }
+// Metodo para generar modelo del coche aleatorio
 string generarModelo() {
 
     string modelo;
@@ -169,11 +172,11 @@ int Pila::desapilar() {
 
 }
 
-void Pila::mostrarCima() {
+bool Pila::pilaVacia(){
     if(!cima)
-        cout << "Cima: null"<<endl;
+        return true;
     else
-        cout << "Cima: "<<cima->valor<<endl;
+        return false;
 }
 
 

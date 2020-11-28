@@ -61,7 +61,7 @@ public:
     void apilar(int v);
 
     int desapilar();
-    void mostrarCima();
+    bool pilaVacia();
 
 
 

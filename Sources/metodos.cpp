@@ -44,6 +44,18 @@ string generarColor() {
     return color;
 
 }
+// metodo para generar aleatoriamente lo centros de distribución
+string generarCA() {
+
+    string ca;
+    int posicion;
+    string cas[3] ={"Madrid","Barcelona","Zaragoza"};
+    posicion =  rand()%3;
+    ca = cas[posicion];
+
+    return ca;
+
+}
 // Metodo para generar modelo del coche aleatorio
 string generarModelo() {
 
@@ -149,8 +161,7 @@ bool Cola::vacia(){
         return true;
     return false;
 }
-int menu() {
-}
+
 
 void Pila::apilar(int v) {
     pnodo nuevo;

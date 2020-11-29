@@ -14,11 +14,18 @@ Cola ateca;
 Cola ibiza;
 Cola toledo;
 Pila camion;
+Cola madridCA;
+Cola barcelonaCA;
+Cola zaragozaCA;
+Pila cargaCamionP;
 void pintarLP();
-void descargarCamion();
+void descargarCamion(int i);
 void cargarCamion(int i, int longArray);
 void buscarCoche(string bastidor, int longArray);
 coche buscarCoche(string bastidor);
+int cargaC = 0;
+int cambioEstado;
+
 int main() {
 
 
@@ -29,9 +36,10 @@ int main() {
     int i;
     int longArray;
     int longArrayC;
-    int cambioEstado;
     int a, b;
     bool cargarCamionB = false;
+    int contCamion;
+
     do {
 
 
@@ -43,7 +51,7 @@ int main() {
 
         switch (a) {
             case 1:
-
+                contCamion = 1;
                 //Si los coches que hemos introducido son menores que n1 seguimos introduciendo coches
                 longArrayC = nArray * (contEjecucion + 1);
 
@@ -62,7 +70,6 @@ int main() {
                     for (i; i < longArray; i++) {
 
                         coches[i] = generarCoches();
-
                         if (coches[i].modelo == "Arona") {
                             arona.encolar(i);
 
@@ -80,29 +87,29 @@ int main() {
 
 
                 }
-                    if (contEjecucion == 3 )
-                            cargarCamionB = true;
+                if (contEjecucion == 3 )
+                    cargarCamionB = true;
 
-                    if (cargarCamionB) {
-                        int cargaCamion = N3;
+                if (cargarCamionB) {
+                    cargaC =0;
+                    int cargaCamion = N3;
 
-                        if(cargaCamion >= N2) {
-                            cout << "Se carga el camion 1 " << endl;
-
+                    if(cargaCamion >= N2) {
+                        cout << "Se carga el camion 1 " << endl;
+                        contCamion = 2;
+                        cargarCamion(i, longArray);
+                    }
+                    else if(cargaCamion < N2){
+                        cargaCamion = 0;
+                        while (cargaCamion < N2 ){
+                            cout << "Se carga el camion "<<contCamion << endl;
                             cargarCamion(i, longArray);
-                        }
-                        else if(cargaCamion <= N2){
-                            cargaCamion = 0;
-                            int cont = 1;
-                            while (cargaCamion < N2 ){
-                                cout << "Se carga el camion "<<cont << endl;
-                                cargarCamion(i, longArray);
-                                cargaCamion += N3;
-                                cont++;
+                            cargaCamion += N3;
+                            contCamion++;
 
-                            }
                         }
                     }
+                }
                 // cambiamos de estado a los coches que llevan 2 turnos en lP
                 if(contEjecucion >= 2){
                     longArrayC <=N1+(N2*2)?cambioEstado = longArrayC - (N2*2): cambioEstado = N1;
@@ -114,6 +121,7 @@ int main() {
                     }
                 }
                 //generamos la cabecera de la linea de produccion
+
 
                 generarCabezera();
                 // generamos la linea de producción
@@ -137,8 +145,9 @@ int main() {
 
                 }
 
-                // descargamos el camion
-                descargarCamion();
+                // descargamos los camiones
+                if(!camion.pilaVacia())
+                    descargarCamion(contCamion-1);
 
                 // autmentamos el contador de ejecucion
                 contEjecucion++;
@@ -178,9 +187,9 @@ void pintarLP(){
 
         if (!arona.vacia()) {
             int y = arona.desencolar();
-                cout << setw(8) << coches[y].bastidor << "|" << setw(6) << coches[y].modelo << "|"
-                     << setw(8)
-                     << coches[y].color << "|" << setw(6) << coches[y].estado << "|";
+            cout << setw(8) << coches[y].bastidor << "|" << setw(6) << coches[y].modelo << "|"
+                 << setw(8)
+                 << coches[y].color << "|" << setw(6) << coches[y].estado << "|";
 
         } else
             cout << setw(8) << " " << "|" << setw(6) << " " << "|" << setw(8) << " " << "|" << setw(6)
@@ -189,9 +198,9 @@ void pintarLP(){
         if (!ateca.vacia()) {
             int j = ateca.desencolar();
 
-                cout << setw(8) << coches[j].bastidor << "|" << setw(6) << coches[j].modelo << "|"
-                     << setw(8)
-                     << coches[j].color << "|" << setw(6) << coches[j].estado << "|";
+            cout << setw(8) << coches[j].bastidor << "|" << setw(6) << coches[j].modelo << "|"
+                 << setw(8)
+                 << coches[j].color << "|" << setw(6) << coches[j].estado << "|";
 
         } else
             cout << setw(8) << " " << "|" << setw(6) << " " << "|" << setw(8) << " " << "|" << setw(6)
@@ -200,9 +209,9 @@ void pintarLP(){
         if (!ibiza.vacia()) {
             int k = ibiza.desencolar();
 
-                cout << setw(8) << coches[k].bastidor << "|" << setw(6) << coches[k].modelo << "|"
-                     << setw(8)
-                     << coches[k].color << "|" << setw(6) << coches[k].estado << "|";
+            cout << setw(8) << coches[k].bastidor << "|" << setw(6) << coches[k].modelo << "|"
+                 << setw(8)
+                 << coches[k].color << "|" << setw(6) << coches[k].estado << "|";
 
         } else
             cout << setw(8) << " " << "|" << setw(6) << " " << "|" << setw(8) << " " << "|" << setw(6)
@@ -212,9 +221,9 @@ void pintarLP(){
         if (!toledo.vacia()) {
             int x = toledo.desencolar();
 
-                cout << setw(8) << coches[x].bastidor << "|" << setw(6) << coches[x].modelo << "|"
-                     << setw(8)
-                     << coches[x].color << "|" << setw(6) << coches[x].estado << "|";
+            cout << setw(8) << coches[x].bastidor << "|" << setw(6) << coches[x].modelo << "|"
+                 << setw(8)
+                 << coches[x].color << "|" << setw(6) << coches[x].estado << "|";
 
         } else
             cout << setw(8) << " " << "|" << setw(6) << " " << "|" << setw(8) << " " << "|" << setw(6)
@@ -236,52 +245,90 @@ void cargarCamion(int i, int longArray){
             coches[i].estado = "ci";
             cout <<"Camion cargado con: "<<coches[i].bastidor<<" Estado: "<<coches[i].estado<<endl;
 
-            if (coches[i].modelo == "Arona") {
-                arona.desencolar();
-
-            } else if (coches[i].modelo == "Ateca") {
-                ateca.desencolar();
-
-            } else if (coches[i].modelo == "Ibiza") {
-                ibiza.desencolar();
-
-            } else if (coches[i].modelo == "Toledo") {
-                toledo.desencolar();
-
-            }
-             c++;
+            c++;
+            cargaC++;
 
         }
         // si los coches no tienen estado fi o ff no se muestran
-        else if(coches[i].estado=="ci" || coches[i].estado=="cf"){
-            if (coches[i].modelo == "Arona") {
-                arona.desencolar();
 
-            } else if (coches[i].modelo == "Ateca") {
-                ateca.desencolar();
-
-            } else if (coches[i].modelo == "Ibiza") {
-                ibiza.desencolar();
-
-            } else if (coches[i].modelo == "Toledo") {
-                toledo.desencolar();
-
-            }
-
-
-        }
 
         if (c == N3)
             break;
+
     }
+
+    if(cargaC == N3|| cambioEstado == N1){
+        for (i = 0; i < longArray; i++) {
+            if(coches[i].estado=="ci" || coches[i].estado=="cf" ||coches[i].estado=="ff"){
+                if (coches[i].modelo == "Arona") {
+                    arona.desencolar();
+
+                } else if (coches[i].modelo == "Ateca") {
+                    ateca.desencolar();
+
+                } else if (coches[i].modelo == "Ibiza") {
+                    ibiza.desencolar();
+
+                } else if (coches[i].modelo == "Toledo") {
+                    toledo.desencolar();
+
+                }
+
+
+            }
+        }
+
+    }
+
+
+    cargaCamionP.apilar(c);
+
 }
 // metodo para descargar el camion
-void descargarCamion(){
+void descargarCamion(int conCamion){
     // Mientras la pila del camion no este vacia lo descarga
-    while (!camion.pilaVacia()){
-        int i = camion.desapilar();
-        coches[i].estado = "cf";
-        cout << "Camion descargando... :"<< coches[i].bastidor<<" Estado: "<< coches[i].estado<<endl;
+    cout<<conCamion<<endl;
+    while (conCamion >=1) {
+        int carga = cargaCamionP.desapilar();
+        int c = 1;
+        string caSeleccionado = generarCA();
+        cout << "El camion "<<conCamion<<" se descarga en: "<<caSeleccionado<<endl;
+        while(c <=carga){
+            int m = camion.desapilar();
+            coches[m].estado = "cf";
+
+            if(caSeleccionado == "Madrid"){
+                madridCA.encolar(m);
+            }
+            if(caSeleccionado == "Barcelona"){
+                barcelonaCA.encolar(m);
+            }
+            if(caSeleccionado == "Zaragoza"){
+                zaragozaCA.encolar(m);
+            }
+            cout << "Camion descargando... :"<< coches[m].bastidor<<" Estado: "<< coches[m].estado<<" en: "<<caSeleccionado<<endl;
+            c++;
+        }
+
+        conCamion--;
+
+    }
+
+
+
+    cout<<"centro madrid"<<endl;
+
+    while (!madridCA.vacia()){
+        cout<< coches[madridCA.desencolar()].bastidor<<endl;
+    }
+    cout<<"centro barcelona"<<endl;
+
+    while (!barcelonaCA.vacia()){
+        cout<< coches[barcelonaCA.desencolar()].bastidor<<endl;
+    }
+    cout<<"centro zaragoza"<<endl;
+    while (!zaragozaCA.vacia()){
+        cout<< coches[zaragozaCA.desencolar()].bastidor<<endl;
     }
 }
 

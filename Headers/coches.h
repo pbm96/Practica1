@@ -72,7 +72,7 @@ string generarBastidor();
 string generarModelo();
 string generarColor();
 coche generarCoches();
-
+string generarCA();
 
 
 

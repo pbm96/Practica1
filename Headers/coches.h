@@ -4,7 +4,7 @@
 
 #define N1 100
 #define N2 8
-#define N3 8
+#define N3 3
 #ifndef PRACTICA1_COCHES_H
 #define PRACTICA1_COCHES_H
 
@@ -67,6 +67,8 @@ public:
 
 };
 void generarCabezera();
+void generarCabezeraCA();
+
 void generarLP(Cola arona, Cola ateca, Cola ibiza, Cola toledo, coche coches[]);
 string generarBastidor();
 string generarModelo();

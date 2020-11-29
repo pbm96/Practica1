@@ -17,8 +17,13 @@ Pila camion;
 Cola madridCA;
 Cola barcelonaCA;
 Cola zaragozaCA;
+Cola madridCAaux;
+Cola barcelonaCAaux;
+Cola zaragozaCAaux;
 Pila cargaCamionP;
 void pintarLP();
+void guardarCochesPilaAuxCA();
+void pintarCA();
 void descargarCamion(int i);
 void cargarCamion(int i, int longArray);
 void buscarCoche(string bastidor, int longArray);
@@ -91,6 +96,7 @@ int main() {
                     cargarCamionB = true;
 
                 if (cargarCamionB) {
+                    guardarCochesPilaAuxCA();
                     cargaC =0;
                     int cargaCamion = N3;
 
@@ -146,8 +152,14 @@ int main() {
                 }
 
                 // descargamos los camiones
-                if(!camion.pilaVacia())
+                if(!camion.pilaVacia()){
                     descargarCamion(contCamion-1);
+                    generarCabezeraCA();
+                    pintarCA();
+                }else if(longArray >= N1){
+                    generarCabezeraCA();
+                    pintarCA();
+                }
 
                 // autmentamos el contador de ejecucion
                 contEjecucion++;
@@ -190,7 +202,6 @@ void pintarLP(){
             cout << setw(8) << coches[y].bastidor << "|" << setw(6) << coches[y].modelo << "|"
                  << setw(8)
                  << coches[y].color << "|" << setw(6) << coches[y].estado << "|";
-
         } else
             cout << setw(8) << " " << "|" << setw(6) << " " << "|" << setw(8) << " " << "|" << setw(6)
                  << " "
@@ -315,21 +326,6 @@ void descargarCamion(int conCamion){
     }
 
 
-
-    cout<<"centro madrid"<<endl;
-
-    while (!madridCA.vacia()){
-        cout<< coches[madridCA.desencolar()].bastidor<<endl;
-    }
-    cout<<"centro barcelona"<<endl;
-
-    while (!barcelonaCA.vacia()){
-        cout<< coches[barcelonaCA.desencolar()].bastidor<<endl;
-    }
-    cout<<"centro zaragoza"<<endl;
-    while (!zaragozaCA.vacia()){
-        cout<< coches[zaragozaCA.desencolar()].bastidor<<endl;
-    }
 }
 
 void buscarCoche(string bastidor, int longArray) {
@@ -349,3 +345,59 @@ void buscarCoche(string bastidor, int longArray) {
 
 
 }
+void pintarCA(){
+
+    while (!madridCA.vacia() || !barcelonaCA.vacia() || !zaragozaCA.vacia() ) {
+
+        if (!madridCA.vacia()) {
+            int y = madridCA.desencolar();
+            cout << setw(8) << coches[y].bastidor << "|" << setw(6) << coches[y].modelo << "|"
+                 << setw(8)
+                 << coches[y].color << "|" << setw(6) << coches[y].estado << "|";
+            // guardamos el coche en una pila auxiliar para poder disponer de el todos los turnos
+            madridCAaux.encolar(y);
+
+        } else
+            cout << setw(8) << " " << "|" << setw(6) << " " << "|" << setw(8) << " " << "|" << setw(6)
+                 << " "
+                 << "|";
+        if (!barcelonaCA.vacia()) {
+            int j = barcelonaCA.desencolar();
+
+            cout << setw(8) << coches[j].bastidor << "|" << setw(6) << coches[j].modelo << "|"
+                 << setw(8)
+                 << coches[j].color << "|" << setw(6) << coches[j].estado << "|";
+            barcelonaCAaux.encolar(j);
+        } else
+            cout << setw(8) << " " << "|" << setw(6) << " " << "|" << setw(8) << " " << "|" << setw(6)
+                 << " "
+                 << "|";
+        if (!zaragozaCA.vacia()) {
+            int k = zaragozaCA.desencolar();
+
+            cout << setw(8) << coches[k].bastidor << "|" << setw(6) << coches[k].modelo << "|"
+                 << setw(8)
+                 << coches[k].color << "|" << setw(6) << coches[k].estado << "|";
+            zaragozaCAaux.encolar(k);
+        } else
+            cout << setw(8) << " " << "|" << setw(6) << " " << "|" << setw(8) << " " << "|" << setw(6)
+                 << " "
+                 << "|";
+
+
+        cout << endl;
+
+    }
+}
+// guardamos los coches de la pila auxiliar en la pila de cA para mostrarlo
+void guardarCochesPilaAuxCA(){
+        while(!madridCAaux.vacia()){
+            madridCA.encolar(madridCAaux.desencolar());
+        }
+        while(!barcelonaCAaux.vacia()){
+            barcelonaCA.encolar(barcelonaCAaux.desencolar());
+        }
+        while(!zaragozaCAaux.vacia()){
+            zaragozaCA.encolar(zaragozaCAaux.desencolar());
+        }
+};

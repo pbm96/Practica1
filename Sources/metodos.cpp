@@ -44,6 +44,18 @@ string generarColor() {
     return color;
 
 }
+// metodo para generar aleatoriamente lo centros de distribución
+string generarCA() {
+
+    string ca;
+    int posicion;
+    string cas[3] ={"Madrid","Barcelona","Zaragoza"};
+    posicion =  rand()%3;
+    ca = cas[posicion];
+
+    return ca;
+
+}
 // Metodo para generar modelo del coche aleatorio
 string generarModelo() {
 
@@ -76,7 +88,25 @@ void generarCabezera(){
     cout<<endl;
 
 }
+void generarCabezeraCA(){
 
+    cout<<setw(32)<<"CA Madrid|"<<setw(32)<<"CA Barcelona|"<<setw(32)<<"CA Zaragoza|"<<endl;
+    for(int i = 0; i<96;i++){
+        cout<<"-";
+    }
+    cout<<endl;
+    for(int i = 0; i<3;i++){
+        cout<<setw(9)<<"Bastidor|"<<setw(7)<<"Modelo|"<<setw(9)<<"Color|"<<setw(6)<<"Estado|";
+
+    }
+    cout<<endl;
+
+    for(int i = 0; i<96;i++){
+        cout<<"-";
+    }
+    cout<<endl;
+
+}
 //Funcion para generar la linea de produccion
 void generarLP(Cola arona, Cola ateca, Cola ibiza, Cola toledo, coche coches[]){
 
@@ -149,8 +179,7 @@ bool Cola::vacia(){
         return true;
     return false;
 }
-int menu() {
-}
+
 
 void Pila::apilar(int v) {
     pnodo nuevo;

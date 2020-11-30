@@ -16,8 +16,8 @@ string generarBastidor() {
     //Ejemplo:45A6789
 
     string bastidor;
-     char numeros[] ="0123456789";
-     char letras[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    char numeros[] ="0123456789";
+    char letras[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 
 
@@ -39,7 +39,7 @@ string generarColor() {
     int posicion;
     string colores[6] ={"Blanco","Rojo","Negro","Azul","Naranja","Gris"};
     posicion =  rand()%6;
-        color = colores[posicion];
+    color = colores[posicion];
 
     return color;
 
@@ -72,7 +72,7 @@ string generarModelo() {
 void generarCabezera(){
 
     cout<<setw(32)<<"Linea de produccion 1|"<<setw(32)<<"Linea de produccion 2|"<<setw(32)<<"Linea de produccion 3|"<<setw(32)<<"Linea de produccion 4|"<<endl;
-    for(int i = 0; i<120;i++){
+    for(int i = 0; i<128;i++){
         cout<<"-";
     }
     cout<<endl;
@@ -82,7 +82,7 @@ void generarCabezera(){
     }
     cout<<endl;
 
-    for(int i = 0; i<120;i++){
+    for(int i = 0; i<128;i++){
         cout<<"-";
     }
     cout<<endl;
@@ -90,18 +90,18 @@ void generarCabezera(){
 }
 void generarCabezeraCA(){
 
-    cout<<setw(32)<<"CA Madrid|"<<setw(32)<<"CA Barcelona|"<<setw(32)<<"CA Zaragoza|"<<endl;
-    for(int i = 0; i<96;i++){
+    cout<<setw(37)<<"CA Madrid|"<<setw(37)<<"CA Barcelona|"<<setw(37)<<"CA Zaragoza|"<<endl;
+    for(int i = 0; i<111;i++){
         cout<<"-";
     }
     cout<<endl;
     for(int i = 0; i<3;i++){
-        cout<<setw(9)<<"Bastidor|"<<setw(7)<<"Modelo|"<<setw(9)<<"Color|"<<setw(6)<<"Estado|";
+        cout<<setw(5)<<"zona|"<<setw(9)<<"Bastidor|"<<setw(7)<<"Modelo|"<<setw(9)<<"Color|"<<setw(6)<<"Estado|";
 
     }
     cout<<endl;
 
-    for(int i = 0; i<96;i++){
+    for(int i = 0; i<111;i++){
         cout<<"-";
     }
     cout<<endl;
@@ -115,10 +115,10 @@ void generarLP(Cola arona, Cola ateca, Cola ibiza, Cola toledo, coche coches[]){
 // funcion para generar coches para fabricar
 coche generarCoches(){
     struct coche c;
-        c.bastidor = generarBastidor();
-        c.color = generarColor();
-        c.estado = "fi";
-        c.modelo = generarModelo();
+    c.bastidor = generarBastidor();
+    c.color = generarColor();
+    c.estado = "fi";
+    c.modelo = generarModelo();
 
     return c;
 }

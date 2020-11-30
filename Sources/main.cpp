@@ -319,7 +319,6 @@ void cargarCamion(int i, int longArray){
 // metodo para descargar el camion
 void descargarCamion(int conCamion){
     // Mientras la pila del camion no este vacia lo descarga
-    cout<<conCamion<<endl;
     while (conCamion >=1) {
         int carga = cargaCamionP.desapilar();
         int c = 1;

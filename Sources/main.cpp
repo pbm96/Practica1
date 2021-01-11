@@ -8,14 +8,24 @@ void Mostrar(concesionario &d){
     cout << d.clave << ",";
 }
 int main() {
-    Arbol concesionarios;
+    srand(time(0));
 
+    Arbol concesionarios;
+    ListaDoble almacenDistribucion;
+    // Generamos los concesionarios aleatorios
     for(int i = 0;i<N1;i++){
         concesionario c = generarConcesionario();
         concesionarios.Insertar(c);
-        cout << c.clave<<endl;
 
     }
+
+    for(int i = 0;i<N2;i++){
+        coche c = generarCoches();
+        almacenDistribucion.insertarNodo(c,'f');
+        cout<<c.bastidor+",";
+
+    }
+    almacenDistribucion.recorrerLista(0);
     /*Lista lista;
     lista.insertarNodo(20);
     lista.insertarNodo(10);

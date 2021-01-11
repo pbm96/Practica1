@@ -1,12 +1,21 @@
 #include <iostream>
 #include "../Headers/listas.h"
+#include<ctime>
 
 using namespace std;
 
-void Mostrar(int &d){
-    cout << d << ",";
+void Mostrar(concesionario &d){
+    cout << d.clave << ",";
 }
 int main() {
+    Arbol concesionarios;
+
+    for(int i = 0;i<N1;i++){
+        concesionario c = generarConcesionario();
+        concesionarios.Insertar(c);
+        cout << c.clave<<endl;
+
+    }
     /*Lista lista;
     lista.insertarNodo(20);
     lista.insertarNodo(10);
@@ -55,7 +64,7 @@ int main() {
     cout << endl;
     cout << "Borramos por el final" << endl;
     listaDoble.borrarNodo('f');
-    listaDoble.recorrerLista(0);*/
+    listaDoble.recorrerLista(0);
 
     // InserciÃ³n de nodos en Ã¡rbol:
     Arbol ArbolInt;
@@ -125,6 +134,6 @@ int main() {
     cout << "Altura de 10 " << ArbolInt.Altura(10) << endl;
     cout << "Altura de arbol " << ArbolInt.AlturaArbol() << endl;
 
-    cin.get();
+    cin.get();*/
     return 0;
 }

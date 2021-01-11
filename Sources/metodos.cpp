@@ -6,6 +6,95 @@
 #include <iomanip>
 #include "../Headers/listas.h"
 using namespace std;
+
+
+string generarBastidor() {
+
+    //Ejemplo:45A6789
+
+    string bastidor;
+    char numeros[] ="0123456789";
+    char letras[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+
+
+    for (int i = 0; i < 2; ++i)
+        bastidor += numeros[rand() % (sizeof(numeros) - 1)];
+    for (int i = 0; i < 1; ++i)
+        bastidor += letras[rand() % (sizeof(letras) - 1)];
+    for (int i = 0; i < 4; ++i)
+        bastidor += numeros[rand() % (sizeof(numeros) - 1)];
+
+    return bastidor;
+
+}
+int generarClaveConcesionario() {
+
+    //Ejemplo:453
+
+    int clave;
+
+    for (int i = 0; i < 3; ++i)
+        clave = 100+rand()%(1000-100);
+
+    return clave;
+
+}
+// Metodo para generar color del coche aleatorio
+
+string generarColor() {
+
+    string color;
+    int posicion;
+    string colores[6] ={"Blanco","Rojo","Negro","Azul","Naranja","Gris"};
+    posicion =  rand()%6;
+    color = colores[posicion];
+
+    return color;
+
+}
+
+string generarLocalidad() {
+
+    string localidad;
+    int posicion;
+    string localidades[4] ={"Alcobendas","Alcala","Torrejon","Pinto"};
+    posicion =  rand()%4;
+    localidad = localidades[posicion];
+
+    return localidad;
+
+}
+
+string generarModelo() {
+
+    string modelo;
+    int posicion;
+    string modelos[4] ={"Golf","Polo","Passat","T-Roc"};
+    posicion =  rand()%4;
+    modelo = modelos[posicion];
+
+    return modelo;
+
+}
+coche generarCoches(){
+    struct coche c;
+    c.bastidor = generarBastidor();
+    c.color = generarLocalidad();
+    c.modelo = generarModelo();
+
+    return c;
+}
+concesionario generarConcesionario(){
+    struct concesionario c;
+    c.clave = generarClaveConcesionario();
+    c.localidad = generarLocalidad();
+
+    return c;
+}
+
+
+//TADS
 Lista::~Lista()
 {
     pnodo aux;
@@ -18,7 +107,7 @@ Lista::~Lista()
     actual = NULL;
 }
 
-void Lista::insertarNodo(int v) {
+void Lista::insertarNodo(coche v) {
     pnodo aux;
     if (listaVacia())
     {
@@ -33,7 +122,7 @@ void Lista::insertarNodo(int v) {
     }
 }
 
-void Lista::insertarNodoIntermedio(int vnuevo, int posicion) {
+void Lista::insertarNodoIntermedio(coche vnuevo, coche posicion) {
     pnodo aux;
     actual = cabeza;
     if(listaVacia()){
@@ -41,7 +130,7 @@ void Lista::insertarNodoIntermedio(int vnuevo, int posicion) {
         final = cabeza;
     }
     else{
-        while (actual->valor != posicion && actual->siguiente != NULL){
+        while (actual->valor.bastidor != posicion.bastidor && actual->siguiente != NULL){
             actual = actual->siguiente;
         }
         aux = new Nodo(vnuevo, NULL);
@@ -50,15 +139,15 @@ void Lista::insertarNodoIntermedio(int vnuevo, int posicion) {
     }
 }
 
-void Lista::borrarNodo(int v) {
+void Lista::borrarNodo(coche v) {
     pnodo anterior;
     actual = cabeza;
-    while (actual->valor!=v && (actual->siguiente)!=NULL)
+    while (actual->valor.bastidor!=v.bastidor && (actual->siguiente)!=NULL)
     {
         anterior=actual;
         actual=actual->siguiente;
     }
-    if(actual->valor == v) {
+    if(actual->valor.bastidor == v.bastidor) {
         if (actual == cabeza) // Primer elemento
             cabeza = actual->siguiente;
         else {
@@ -81,7 +170,7 @@ void Lista::recorrerLista()
     pnodo aux;
     aux = cabeza;
     while(aux) {
-        cout << aux->valor << "-> ";
+        cout << aux->valor.bastidor << "-> ";
         aux = aux->siguiente;
     }
     cout << endl;
@@ -109,7 +198,7 @@ bool Lista::esActual()
 {
     return actual != NULL;
 }
-int Lista::valorActual()
+coche Lista::valorActual()
 {
     return actual->valor;
 }
@@ -131,7 +220,7 @@ ListaDoble::~ListaDoble()
     final=NULL;
 }
 
-void ListaDoble::insertarNodo(int v, char c)
+void ListaDoble::insertarNodo(coche v, char c)
 {
     pnodoDoble aux;
     char tipoInsercion; tipoInsercion=c;
@@ -198,14 +287,14 @@ void ListaDoble::recorrerLista (int orden)
         esPrimero();
         aux = cabeza;
         while(aux) {
-            cout << aux->valor << "-> "; aux = aux->siguienteDoble;
+            cout << aux->valor.bastidor << "-> "; aux = aux->siguienteDoble;
         }
     }
     else {
         esUltimo();
         aux = final;
         while(aux) {
-            cout << aux->valor << "-> "; aux = aux->anteriorDoble;
+            cout << aux->valor.bastidor << "-> "; aux = aux->anteriorDoble;
         }
     }
     cout << endl;
@@ -235,10 +324,9 @@ bool ListaDoble::esActual()
 {
     return actual != NULL;
 }
-int ListaDoble::valorActual()
+coche ListaDoble::valorActual()
 {
     if (!listaVacia())return actual->valor;
-    else return 0;
 }
 void Arbol::Podar(NodoArbol* &nodo)
 {
@@ -249,42 +337,42 @@ void Arbol::Podar(NodoArbol* &nodo)
         nodo = NULL;
     }
 }
-bool Arbol::Buscar(const int dat)
+bool Arbol::Buscar(const concesionario dat)
 {
     actual = raiz;
     while(!Vacio(actual))
     {
-        if(dat == actual->dato) return true;
+        if(dat.clave == actual->dato.clave) return true;
         else
-        if(dat > actual->dato) actual = actual->derecho;
-        else if(dat < actual->dato) actual = actual->izquierdo;
+        if(dat.clave > actual->dato.clave) actual = actual->derecho;
+        else if(dat.clave < actual->dato.clave) actual = actual->izquierdo;
     }
     return false;
 }
-void Arbol::Insertar (const int dat)
+void Arbol::Insertar (const concesionario dat)
 {
     NodoArbol *padre = NULL;
     actual = raiz;
-    while(!Vacio(actual) && dat != actual->dato)
+    while(!Vacio(actual) && dat.clave != actual->dato.clave)
     {
         padre = actual;
-        if(dat > actual->dato) actual = actual->derecho;
-        else if(dat < actual->dato) actual = actual->izquierdo;
+        if(dat.clave > actual->dato.clave) actual = actual->derecho;
+        else if(dat.clave < actual->dato.clave) actual = actual->izquierdo;
     }
     if(!Vacio(actual)) return;
     if(Vacio(padre)) raiz = new NodoArbol(dat);
-    else if(dat < padre->dato) padre->izquierdo = new NodoArbol(dat);
-    else if(dat > padre->dato) padre->derecho = new NodoArbol(dat);
+    else if(dat.clave < padre->dato.clave) padre->izquierdo = new NodoArbol(dat);
+    else if(dat.clave > padre->dato.clave) padre->derecho = new NodoArbol(dat);
 }
-void Arbol::Borrar(const int dat)
+void Arbol::Borrar(const concesionario dat)
 {
     NodoArbol *padre = NULL;
     NodoArbol *nodo;
-    char aux;
+    int aux;
     actual = raiz;
     while(!Vacio(actual))
     {
-        if(dat == actual->dato) { // Si el valor está en el nodo actual
+        if(dat.clave == actual->dato.clave) { // Si el valor está en el nodo actual
             if(EsHoja(actual)){
                 if(padre) // Si tiene padre (no es el nodo raiz)
                     if(padre->derecho == actual) padre->derecho = NULL;
@@ -312,28 +400,28 @@ void Arbol::Borrar(const int dat)
                         nodo = nodo->derecho;
                     }
                 }
-                aux = actual->dato;
+                aux = actual->dato.clave;
                 actual->dato = nodo->dato;
-                nodo->dato = aux;
+                nodo->dato.clave = aux;
                 actual = nodo;
             }
         }
         else
         {
             padre = actual;
-            if(dat > actual->dato) actual = actual->derecho;
-            else if(dat < actual->dato) actual = actual->izquierdo;
+            if(dat.clave > actual->dato.clave) actual = actual->derecho;
+            else if(dat.clave < actual->dato.clave) actual = actual->izquierdo;
         }
     }
 }
-void Arbol::PreOrden(void (*func)(int&), NodoArbol *nodo, bool r)
+void Arbol::PreOrden(void (*func)(concesionario&), NodoArbol *nodo, bool r)
 {
     if(r) nodo = raiz;
     func(nodo->dato);
     if(nodo->izquierdo) PreOrden(func, nodo->izquierdo, false);
     if(nodo->derecho) PreOrden(func, nodo->derecho, false);
 }
-void Arbol::InOrden(void (*func)(int &), NodoArbol *nodoArbol, bool r)
+void Arbol::InOrden(void (*func)(concesionario &), NodoArbol *nodoArbol, bool r)
 {
     if(r) nodoArbol = raiz;
     if(nodoArbol->izquierdo)InOrden(func,nodoArbol->izquierdo, false);
@@ -341,7 +429,7 @@ void Arbol::InOrden(void (*func)(int &), NodoArbol *nodoArbol, bool r)
     if(nodoArbol->derecho)InOrden(func,nodoArbol->derecho, false);
 
 }
-void Arbol::PostOrden(void (*func)(int &), NodoArbol *nodoArbol, bool r)
+void Arbol::PostOrden(void (*func)(concesionario &), NodoArbol *nodoArbol, bool r)
 {
     if(r) nodoArbol = raiz;
     if(nodoArbol->izquierdo)PostOrden(func,nodoArbol->izquierdo, false);
@@ -349,16 +437,16 @@ void Arbol::PostOrden(void (*func)(int &), NodoArbol *nodoArbol, bool r)
     func(nodoArbol->dato);
 
 }
- int Arbol::Altura(const int dat) {
+ int Arbol::Altura(const concesionario dat) {
     int altura = 0;
     actual = raiz;
 
     while (!Vacio(actual)){
-        if(dat == actual->dato) return altura;
+        if(dat.clave == actual->dato.clave) return altura;
         else{
             altura++;
-            if(dat > actual->dato) actual = actual->derecho;
-            if(dat < actual->dato) actual = actual->izquierdo;
+            if(dat.clave > actual->dato.clave) actual = actual->derecho;
+            if(dat.clave < actual->dato.clave) actual = actual->izquierdo;
 
         }
     }

@@ -103,6 +103,29 @@ int main() {
 
     }while (cochesEnConcesionarios<N4);
 
+    // generar concesionario Aleatorio
+    int concesionariosNuevos = 0;
+    concesionario c = generarConcesionario();
+    cout<< "Se ha insertado un concesionario aleatoriamente en: "<<c.localidad<<" con clave: "<<c.clave<<endl;
 
+    concesionarios.Insertar(c);
+    concesionariosNuevos+=1;
+
+    // Borrar concesionario:
+    int claveConcesionario;
+    cout<<"Introducir clave de concesionario a borrar: "<<endl;
+    cin>>claveConcesionario;
+
+
+    if(concesionarios.Buscar(claveConcesionario)) {
+        concesionarios.Borrar(concesionarios.ValorActual());
+        cout<<"Se ha borrado el concesionario. "<<endl;
+
+    }
+    else
+        cout<<"No se ha encontrado el concesionario. "<<endl;
+
+    generarCuerpoConc();
+    concesionarios.InOrden(MostrarConcesionarioCoches);
     return 0;
 }

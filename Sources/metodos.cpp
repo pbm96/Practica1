@@ -140,6 +140,11 @@ void generarCabezeraConc(){
 
 }
 
+
+
+
+
+
 //TADS
 Lista::~Lista()
 {
@@ -290,7 +295,7 @@ void ListaDoble::insertarNodo(coche v, char c)
 
 void ListaDoble::borrarNodo(char c)
 {
-    char tipoBorrado; tipoBorrado=c;
+    char  tipoBorrado=c;
     if(tipoBorrado=='f') {//Eliminación por el final
         pnodoDoble aux=NULL;
         if((cabeza==final)) { //Sólo hay elemento

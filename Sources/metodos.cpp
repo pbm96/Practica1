@@ -92,7 +92,53 @@ concesionario generarConcesionario(){
 
     return c;
 }
+void generarCabezeraAD(){
 
+    cout<<setw(39)<<"|Area de distribucion|"<<endl;
+    //genera guiones
+    for(int i = 0; i<60;i++){
+        cout<<"-";
+    }
+    cout<<endl;
+    //genera titulos
+   {
+        cout<<setw(20)<<"|Bastidor|"<<setw(15)<<"|Modelo|"<<setw(15)<<"|Color|";
+
+
+    }
+    cout<<endl;
+//genera guiones
+    for(int i = 0; i<60;i++){
+        cout<<"-";
+    }
+    cout<<endl;
+
+}
+void generarCabezeraConc(){
+
+    cout<<setw(150)<<"|CONCESIONARIOS|"<<endl;
+    for(int i = 0; i<300;i++){
+        cout<<"-";
+    }
+    cout<<endl;
+    for(int i = 0; i<N1;i++){
+        cout<<setw(20)<<"|Clave|"<<setw(20)<<"|Localidad|";
+    }
+    cout<<endl;
+
+    for(int i = 0; i<300;i++){
+        cout<<"-";
+    }
+    cout<<endl;
+    for(int i = 0; i<N1;i++){
+        cout<<setw(17)<<"|Bastidor|"<<setw(12)<<"|Modelo|"<<setw(12)<<"|Color|";
+    }
+    cout<<endl;
+    for(int i = 0; i<300;i++){
+        cout<<"-";
+    }
+
+}
 
 
 

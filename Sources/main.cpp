@@ -61,6 +61,10 @@ int main() {
     }
     almacenDistribucion.recorrerLista(0);
     cout<<endl;
+
+    generarCabezeraAD();
+    generarCabezeraConc();
+
     cout <<endl;
 
     do {
@@ -96,6 +100,7 @@ int main() {
         dia++;
 
     }while (dia<=30);
+
     /*Lista lista;
     lista.insertarNodo(20);
     lista.insertarNodo(10);

@@ -44,6 +44,7 @@ int main() {
 
 
     int dia = 1;
+    int cochesEnConcesionarios=0;
     // Generamos los concesionarios aleatorios
     for (int i = 0; i < N1; i++) {
         concesionario c = generarConcesionario();
@@ -98,8 +99,9 @@ int main() {
         cout<< "dia: "<<dia<<endl;
         system("pause");
         dia++;
+        cochesEnConcesionarios+=N3;
 
-    }while (dia<=30);
+    }while (cochesEnConcesionarios<N4);
 
     /*Lista lista;
     lista.insertarNodo(20);

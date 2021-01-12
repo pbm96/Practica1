@@ -117,7 +117,7 @@ void generarCabezeraAD(){
 void generarCabezeraConc(){
 
     cout<<setw(150)<<"|CONCESIONARIOS|"<<endl;
-    for(int i = 0; i<300;i++){
+    for(int i = 0; i<N1*43;i++){
         cout<<"-";
     }
     cout<<endl;

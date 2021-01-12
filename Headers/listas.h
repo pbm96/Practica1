@@ -119,7 +119,7 @@ public:
     ~Arbol() { Podar(raiz); }
     void Insertar(const concesionario dat);
     void Borrar(const concesionario dat);
-    bool Buscar (const concesionario dat);
+    bool Buscar (int dat);
     bool Vacio(NodoArbol *r){return r== NULL;}
     bool EsHoja(NodoArbol *r){return !r->derecho && !r->izquierdo;}
     const int NumeroNodos();

@@ -26,6 +26,9 @@ int main() {
 
     }
     almacenDistribucion.recorrerLista(0);
+    cout<<endl;
+    generarCabezeraAD();
+    generarCabezeraConc();
     /*Lista lista;
     lista.insertarNodo(20);
     lista.insertarNodo(10);

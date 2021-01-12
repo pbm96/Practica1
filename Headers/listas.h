@@ -136,6 +136,8 @@ private:
     void auxAltura(NodoArbol*, int);
 };
 
+void generarCabezeraAD();
+void generarCabezeraConc();
 string generarBastidor();
 string generarModelo();
 string generarColor();

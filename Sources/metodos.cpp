@@ -381,15 +381,15 @@ void Arbol::Podar(NodoArbol* &nodo)
         nodo = NULL;
     }
 }
-bool Arbol::Buscar(const concesionario dat)
+bool Arbol::Buscar(int dat)
 {
     actual = raiz;
     while(!Vacio(actual))
     {
-        if(dat.clave == actual->dato.clave) return true;
+        if(dat == actual->dato.clave) return true;
         else
-        if(dat.clave > actual->dato.clave) actual = actual->derecho;
-        else if(dat.clave < actual->dato.clave) actual = actual->izquierdo;
+        if(dat > actual->dato.clave) actual = actual->derecho;
+        else if(dat < actual->dato.clave) actual = actual->izquierdo;
     }
     return false;
 }

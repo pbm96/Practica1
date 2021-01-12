@@ -1,7 +1,7 @@
 //
 // Created by Pablo on 07/01/2021.
 //
-#define N1 4 //Concesionarios
+#define N1 7 //Concesionarios
 #define N2 100 // coches generados
 #define N3 12 // coches enviados a cada concesionario
 #define N4 7*N3 // con este numero se muestra el menu
@@ -137,7 +137,7 @@ private:
 };
 
 void generarCabezeraAD();
-void generarCabezeraConc();
+void generarCuerpoConc();
 string generarBastidor();
 string generarModelo();
 string generarColor();

@@ -80,7 +80,7 @@ string generarModelo() {
 coche generarCoches(){
     struct coche c;
     c.bastidor = generarBastidor();
-    c.color = generarLocalidad();
+    c.color = generarColor();
     c.modelo = generarModelo();
 
     return c;
@@ -114,29 +114,20 @@ void generarCabezeraAD(){
     cout<<endl;
 
 }
-void generarCabezeraConc(){
 
-    cout<<setw(150)<<"|CONCESIONARIOS|"<<endl;
-    for(int i = 0; i<N1*43;i++){
-        cout<<"-";
-    }
-    cout<<endl;
-    for(int i = 0; i<N1;i++){
-        cout<<setw(20)<<"|Clave|"<<setw(20)<<"|Localidad|";
-    }
+void generarCuerpoConc(){
+
+
+
+        cout<<setw(16)<<"|Bastidor|"<<setw(12)<<"|Modelo|"<<setw(12)<<"|Color|"<<setw(20)<<"|clave|"<<setw(20)<<"|concesionario|";
+
     cout<<endl;
 
-    for(int i = 0; i<300;i++){
+    for(int i = 0; i<83;i++){
         cout<<"-";
     }
     cout<<endl;
-    for(int i = 0; i<N1;i++){
-        cout<<setw(17)<<"|Bastidor|"<<setw(12)<<"|Modelo|"<<setw(12)<<"|Color|";
-    }
-    cout<<endl;
-    for(int i = 0; i<300;i++){
-        cout<<"-";
-    }
+
 
 }
 
@@ -338,14 +329,16 @@ void ListaDoble::recorrerLista (int orden)
         esPrimero();
         aux = cabeza;
         while(aux) {
-            cout << aux->valor.bastidor << "-> "; aux = aux->siguienteDoble;
+            cout <<setw(19)<< aux->valor.bastidor<<"|" << setw(14)<<aux->valor.modelo<<"|"<<setw(14)<<aux->valor.color<<"|"<<endl;
+            aux = aux->siguienteDoble;
         }
     }
     else {
         esUltimo();
         aux = final;
         while(aux) {
-            cout << aux->valor.bastidor << "-> "; aux = aux->anteriorDoble;
+            cout <<setw(20)<< aux->valor.bastidor << setw(15)<<aux->valor.color<<setw(15)<<aux->valor.modelo<<endl;
+            aux = aux->anteriorDoble;
         }
     }
     cout << endl;

@@ -117,7 +117,7 @@ void generarCabezeraAD(){
 void generarCabezeraConc(){
 
     cout<<setw(150)<<"|CONCESIONARIOS|"<<endl;
-    for(int i = 0; i<300;i++){
+    for(int i = 0; i<N1*43;i++){
         cout<<"-";
     }
     cout<<endl;
@@ -139,6 +139,11 @@ void generarCabezeraConc(){
     }
 
 }
+
+
+
+
+
 
 //TADS
 Lista::~Lista()
@@ -290,7 +295,7 @@ void ListaDoble::insertarNodo(coche v, char c)
 
 void ListaDoble::borrarNodo(char c)
 {
-    char tipoBorrado; tipoBorrado=c;
+    char  tipoBorrado=c;
     if(tipoBorrado=='f') {//Eliminación por el final
         pnodoDoble aux=NULL;
         if((cabeza==final)) { //Sólo hay elemento

@@ -4,31 +4,105 @@
 
 using namespace std;
 
-void Mostrar(concesionario &d){
-    cout << d.clave << ",";
-}
-int main() {
-    srand(time(0));
 
+// funcion para mostrar los concesionarios
+void MostrarConcesionario(concesionario &d){
+    coche c;
+
+        d.automoviles.esPrimero();
+        while(d.automoviles.esActual()) {
+            cout << "concesionario: "<<d.clave<<"--"<<d.automoviles.valorActual().bastidor << endl;
+
+            d.automoviles.esSiguiente();
+        }
+        d.automoviles.esPrimero();
+
+}
+
+void Mostrar2(concesionario &d){
+    cout<<d.clave<<endl;
+}
+
+
+int numeroAleatorioConcesionario;
+
+coche cochePrimero;
+int numero = 0;
+
+// funcion para introducir coches en exposicion
+void concesionarioAleatorio(concesionario &d){
+    if(numero == numeroAleatorioConcesionario){
+         d.automoviles.insertarNodo(cochePrimero);
+    }
+    numero++;
+}
+
+int main() {
     Arbol concesionarios;
     ListaDoble almacenDistribucion;
+    srand(time(0));
+
+
+    int dia = 1;
+    int cochesEnConcesionarios=0;
     // Generamos los concesionarios aleatorios
-    for(int i = 0;i<N1;i++){
+    for (int i = 0; i < N1; i++) {
         concesionario c = generarConcesionario();
         concesionarios.Insertar(c);
 
     }
+    concesionarios.InOrden(Mostrar2);
 
-    for(int i = 0;i<N2;i++){
+    // Generamos los coches del centro de almacenamiento
+    for (int i = 0; i < N2; i++) {
         coche c = generarCoches();
-        almacenDistribucion.insertarNodo(c,'f');
-        cout<<c.bastidor+",";
+        almacenDistribucion.insertarNodo(c, 'f');
+        cout << c.bastidor + ",";
 
     }
     almacenDistribucion.recorrerLista(0);
     cout<<endl;
+
     generarCabezeraAD();
     generarCabezeraConc();
+
+    cout <<endl;
+
+    do {
+
+
+        almacenDistribucion.esPrimero();
+
+
+        for (int i = 0; i < N3; i++) {
+            if(!almacenDistribucion.listaVacia()) {
+                cochePrimero = almacenDistribucion.valorActual();
+                cout << cochePrimero.bastidor << endl;
+                // Movemos el puntero;
+
+
+                almacenDistribucion.esSiguiente();
+                // Borramos el coche del almacen de distribucion
+                almacenDistribucion.borrarNodo('p');
+
+
+                numeroAleatorioConcesionario = 1 + rand() % (N1 - 1);
+                cout << numeroAleatorioConcesionario << endl;
+
+                numero = 0;
+                concesionarios.InOrden(concesionarioAleatorio);
+            }
+        }
+
+        concesionarios.InOrden(MostrarConcesionario);
+
+        cout<< "dia: "<<dia<<endl;
+        system("pause");
+        dia++;
+        cochesEnConcesionarios+=N3;
+
+    }while (cochesEnConcesionarios<N4);
+
     /*Lista lista;
     lista.insertarNodo(20);
     lista.insertarNodo(10);

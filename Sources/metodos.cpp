@@ -130,7 +130,7 @@ void generarCuerpoConc(){
 
     cout<<endl;
 
-    for(int i = 0; i<83;i++){
+    for(int i = 0; i<103;i++){
         cout<<"-";
     }
     cout<<endl;

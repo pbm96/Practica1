@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <fstream>
 
 #include "../Headers/listas.h"
 #include<ctime>
@@ -19,6 +20,21 @@ void MostrarConcesionarioCoches(concesionario &d){
 
             d.automoviles.esSiguiente();
         }
+
+
+}
+ofstream file;
+void MostrarConcesionarioCochesTxt(concesionario &d){
+
+    coche c;
+
+    d.automoviles.esPrimero();
+    file<<endl;
+    while(d.automoviles.esActual()) {
+        file <<setw(15)<<d.automoviles.valorActual().bastidor<<"|"<<setw(11)<<d.automoviles.valorActual().modelo<<"|"<<setw(11)<<d.automoviles.valorActual().color <<"|"<<setw(19)<<d.clave<<"|"<<setw(19)<<d.localidad<<"|"<<setw(19)<<d.automoviles.valorActual().dia<<"|"<< endl;
+
+        d.automoviles.esSiguiente();
+    }
 
 
 }
@@ -146,7 +162,7 @@ int main() {
         cout << "6- Vender algun automovil concreto de un concesionario concreto \n";
         cout << "7- Llevar un automovil concreto del AD a un concesionario concreto.\n";
         cout << "8- Llevar un automovil concreto de un concesionario a otro.\n";
-        cout << "9- mejora\n";
+        cout << "9- Exportar datos concesionario a .txt\n";
 
         cout << "0- Salir\n";
 
@@ -376,6 +392,21 @@ int main() {
                 generarCuerpoConc();
                 concesionarios.InOrden(MostrarConcesionarioCoches);
                 dia++;
+                break;
+            }
+            case 9:{
+                file.open("D:/Pablo/Escritorio/eedd.txt");
+                file<<setw(16)<<"|Bastidor|"<<setw(12)<<"|Modelo|"<<setw(12)<<"|Color|"<<setw(20)<<"|clave|"<<setw(20)<<"|concesionario|"<<setw(20)<<"|Dia llegada|";
+
+                file<<endl;
+
+                for(int i = 0; i<103;i++){
+                    file<<"-";
+                }
+                file<<endl;
+                concesionarios.InOrden(MostrarConcesionarioCochesTxt);
+                file.close();
+
                 break;
             }
             case 0:

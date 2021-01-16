@@ -23,6 +23,7 @@ void MostrarConcesionarioCoches(concesionario &d){
 
 
 }
+//Funcion para exportar archivos
 ofstream file;
 void MostrarConcesionarioCochesTxt(concesionario &d){
 
@@ -38,6 +39,7 @@ void MostrarConcesionarioCochesTxt(concesionario &d){
 
 
 }
+// Funcion para mostrar las estadisticas de un modelo en concreto
 string modelo;
 int contModelo=0;
 void MostrarEstadisticasCoches(concesionario &d){
@@ -106,7 +108,6 @@ int main() {
          cout <<cochesEnConcesionarios<<endl;
         generarCabezeraAD();
         almacenDistribucion.recorrerLista(0);
-        cout<<endl;
         // Mostramos concesionarios
         if(dia>1){
         almacenDistribucion.esPrimero();
@@ -150,6 +151,7 @@ int main() {
     int a,b;
 
     do {
+        //Mostramos el menu despues del paso 7
         int claveConcesionario, claveConcesionarioNuevo;
         string bastidorCoche, localidadConcesionario, modeloMostrar;
         almacenDistribucion.esPrimero();
@@ -203,6 +205,7 @@ int main() {
                 cout << "Introducir clave de concesionario a borrar: " << endl;
                 cin >> claveConcesionario;
 
+                // buscamos el concesionario a borrar
                 if (concesionarios.Buscar(claveConcesionario)) {
                     concesionarios.Borrar(concesionarios.ValorActual());
                     cout << "Se ha borrado el concesionario. " << endl;
@@ -222,8 +225,10 @@ int main() {
                 concesionario cMostrar;
                 cout << "Introducir clave de concesionario para mostrar: " << endl;
                 cin >> claveConcesionario;
+                //Buscamos el concesionario para mostrar
                 if (concesionarios.Buscar(claveConcesionario)) {
                     cMostrar = concesionarios.ValorActual();
+                    // Mostramos el concesionario
                     cMostrar.automoviles.esPrimero();
                     while(cMostrar.automoviles.esActual()) {
 
@@ -256,10 +261,12 @@ int main() {
                 cin >> claveConcesionario;
                 cout << "Introducir bastidor del coche " << endl;
                 cin >> bastidorCoche;
+                //Buscamos el concesionario del coche
                 if (concesionarios.Buscar(claveConcesionario)) {
                     cMostrar = concesionarios.ValorActual();
                     cMostrar.automoviles.esPrimero();
                     while(cMostrar.automoviles.esActual()) {
+                        // si se encuentra el coche se borra
                             if(cMostrar.automoviles.valorActual().bastidor == bastidorCoche) {
                                 cMostrar.automoviles.borrarNodo(cMostrar.automoviles.valorActual());
                                 cout<<"El coche "<<bastidorCoche<<" se ha borrado correctamente"<<endl;
@@ -292,9 +299,11 @@ int main() {
                 cout << "Introducir bastidor del coche " << endl;
                 cin >> bastidorCoche;
 
+                // buscamos el concesionario donde llevar el coche
                 if (concesionarios.Buscar(claveConcesionario)) {
                     cMostrar = concesionarios.ValorActual();
                    while (almacenDistribucion.esActual()){
+                       // Si se encuentra el coche del ad se mueve al concesionario
                        if(almacenDistribucion.valorActual().bastidor == bastidorCoche){
 
                            coche c =  almacenDistribucion.valorActual();
@@ -303,6 +312,7 @@ int main() {
                            claveManual = cMostrar.clave;
                            cManual = c;
                             concesionarios.InOrden(introducirAutomovilManual);
+                            // se borra el coche del ad
                             almacenDistribucion.borrarNodoIntermedio(almacenDistribucion.valorActual());
                            insertar = true;
 
@@ -344,11 +354,13 @@ int main() {
                 cout << "Introducir clave de concesionario nuevo " << endl;
                 cin >> claveConcesionarioNuevo;
 
+                // buscamos el concesionario del coche
                 if (concesionarios.Buscar(claveConcesionario)  ) {
                     cMostrar = concesionarios.ValorActual();
 
                     cMostrar.automoviles.esPrimero();
                     while(cMostrar.automoviles.esActual()) {
+                        // si encontramos el coche se traslada al otro concesionario si se encuentra
                         if (cMostrar.automoviles.valorActual().bastidor == bastidorCoche) {
                              ca = cMostrar.automoviles.valorActual();
                              cout<<"bastidor: "<< ca.bastidor;
@@ -358,9 +370,8 @@ int main() {
                     }
                     cMostrar.automoviles.esPrimero();
 
-
+                    // si se encuentra el concesionario donde llevar el coche y se borra el antiguo
                     if(concesionarios.Buscar(claveConcesionarioNuevo) && ca.bastidor == bastidorCoche){
-                        cout<<"holaaa"<<endl;
                         cNuevo = concesionarios.ValorActual();
                         claveManual = cNuevo.clave;
                         cManual = ca;
@@ -381,7 +392,7 @@ int main() {
                     cout<<"El coche "<<bastidorCoche<<" No se ha movido correctamente"<<endl;
 
                 }else{
-                    cout<<"El coche "<<bastidorCoche<<" Se ha movido al concesionario: "<<cMostrar.clave<<endl;
+                    cout<<"El coche "<<bastidorCoche<<" Se ha movido al concesionario: "<<cNuevo.clave<<endl;
 
                 }
                 almacenDistribucion.esPrimero();
@@ -395,6 +406,7 @@ int main() {
                 break;
             }
             case 9:{
+
                 file.open("D:/Pablo/Escritorio/eedd.txt");
                 file<<setw(16)<<"|Bastidor|"<<setw(12)<<"|Modelo|"<<setw(12)<<"|Color|"<<setw(20)<<"|clave|"<<setw(20)<<"|concesionario|"<<setw(20)<<"|Dia llegada|";
 

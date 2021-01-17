@@ -13,6 +13,7 @@ struct coche {
     string bastidor;
     string color;
     string modelo;
+    int dia;
 };struct concesionario;
 
 class Nodo
@@ -73,6 +74,7 @@ struct concesionario {
     string localidad;
     int clave;
     Lista automoviles;
+
 };
 class NodoArbol
 {
@@ -98,6 +100,8 @@ public:
     void insertarNodo(coche v, char c);
     void borrarNodo(char c);
     bool listaVacia();
+    void borrarNodoIntermedio(coche v);
+
     void recorrerLista(int);
     void esSiguiente();
     void esAnterior(); void
@@ -144,5 +148,7 @@ string generarColor();
 coche generarCoches();
 int generarClaveConcesionario();
 concesionario generarConcesionario();
+concesionario generarConcesionarioManual(string localidad, int clave);
+
 string generarLocalidad();
 #endif //LISTAS_LISTAS_H

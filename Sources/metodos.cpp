@@ -92,6 +92,13 @@ concesionario generarConcesionario(){
 
     return c;
 }
+concesionario generarConcesionarioManual(string localidad, int clave){
+    struct concesionario c;
+    c.clave = clave;
+    c.localidad = localidad;
+
+    return c;
+}
 void generarCabezeraAD(){
 
     cout<<setw(39)<<"|Area de distribucion|"<<endl;
@@ -119,11 +126,11 @@ void generarCuerpoConc(){
 
 
 
-        cout<<setw(16)<<"|Bastidor|"<<setw(12)<<"|Modelo|"<<setw(12)<<"|Color|"<<setw(20)<<"|clave|"<<setw(20)<<"|concesionario|";
+        cout<<setw(16)<<"|Bastidor|"<<setw(12)<<"|Modelo|"<<setw(12)<<"|Color|"<<setw(20)<<"|clave|"<<setw(20)<<"|concesionario|"<<setw(20)<<"|Dia llegada|";
 
     cout<<endl;
 
-    for(int i = 0; i<83;i++){
+    for(int i = 0; i<103;i++){
         cout<<"-";
     }
     cout<<endl;
@@ -247,6 +254,8 @@ coche Lista::valorActual()
 
 const int ASCENDENTE=0;
 const int DESCENDENTE=1;
+
+
 ListaDoble::~ListaDoble()
 {
     pnodoDoble aux;
@@ -260,6 +269,28 @@ ListaDoble::~ListaDoble()
     cabeza=NULL;
     actual=NULL;
     final=NULL;
+}
+
+void ListaDoble::borrarNodoIntermedio(coche v) {
+    pnodoDoble anterior;
+    actual = cabeza;
+    while (actual->valor.bastidor!=v.bastidor && (actual->siguienteDoble)!=NULL)
+    {
+        anterior=actual;
+        actual=actual->siguienteDoble;
+    }
+    if(actual->valor.bastidor == v.bastidor) {
+        if (actual == cabeza) // Primer elemento
+            cabeza = actual->siguienteDoble;
+        else {
+            anterior->siguienteDoble = actual->siguienteDoble;
+            if (actual == final) {
+                final = anterior;
+            }
+        }
+        actual->siguienteDoble = NULL;
+        delete actual;
+    }
 }
 
 void ListaDoble::insertarNodo(coche v, char c)
@@ -348,6 +379,7 @@ bool ListaDoble::listaVacia()
 {
     return cabeza == NULL;
 }
+
 void ListaDoble::esSiguiente()
 {
     if(actual) actual = actual->siguienteDoble;
@@ -364,6 +396,7 @@ void ListaDoble::esUltimo()
 {
     actual=final;
 }
+
 bool ListaDoble::esActual()
 {
     return actual != NULL;
